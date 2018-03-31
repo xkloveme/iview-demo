@@ -30,6 +30,10 @@ module.exports = {
                 }
             },
             {
+                test: /\.sass$/,
+                loaders: ['style', 'css', 'scss']
+               },
+            {
                 test: /iview\/.*?js$/,
                 loader: 'babel-loader'
             },
