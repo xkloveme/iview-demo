@@ -6,7 +6,8 @@ import Vuex from 'vuex';
 import Util from './libs/util';
 import App from './app.vue';
 // import 'iview/dist/styles/iview.css';
-import '../my-theme/dist/iview.css';
+// import '../my-theme/dist/iview.css';
+import '../sixi-theme/dist/iview.css';
 
 
 Vue.use(VueRouter);

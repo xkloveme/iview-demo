@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Button type="primary" icon="car">car</Button>
-        <Button type="primary" icon="fly">fly</Button>
+        <Button type="primary" icon="sixi-prompt">sixi-prompt</Button>
+        <Button type="error" shape="circle" icon="alert">Search</Button>
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
             <FormItem label="姓名" prop="name">
                 <Input v-model="formValidate.name" placeholder="请输入姓名"></Input>
@@ -103,6 +103,7 @@ export default {
     },
     methods: {
         handleSubmit(name) {
+            // console.log('adadsasd');
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     this.$Message.success('提交成功!');
