@@ -5,27 +5,34 @@
 </style>
 <template>
   <div>
-    <Table :columns="columnsTable" :data="tableData"></Table>
+    <Table :columns="columnsTable" ref="selection" :show-header="false" :data="tableData" @on-selection-change='selectionData'></Table>
   </div>
 </template>
 <script>
 export default {
   props: {
-    tableData: Array
+    tableData: Array,
+    status: Boolean
   },
-  data: {
-    return() {
+  watch: {
+    'status'(val) {
+      this.selectAllSKU(val)
+    }
+  },
+  methods: {
+    // 全选方法
+    selectAllSKU(status) {
+      this.$refs.selection.selectAll(status);
+    },
+    selectionData(selection) {
+      this.$emit('selectSKU', selection)
+    }
+  },
+  data() {
+    return {
       columnsTable: [
         {
-          type: 'expand',
           width: 50,
-          render: (h, params) => {
-            return h(expandRow, {
-              props: {
-                row: params.row
-              }
-            })
-          }
         },
         {
           type: 'selection',
