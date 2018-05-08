@@ -1,6 +1,6 @@
 
 <template>
-  <Table :columns="columns10" :data="data9" @on-expand="expandRowtag" @on-select="selectData" @on-select-cancel="selectCancel"></Table>
+  <Table :columns="columns10" :data="data9" @on-select-all='selectSPU' @on-expand="expandRowtag" @on-select="selectData" @on-select-cancel="selectCancel"></Table>
 </template>
 <script>
 import expandRow from './../components/expandTable.vue';
@@ -9,29 +9,36 @@ export default {
   methods: {
     expandRowtag(row, status) {
       console.log(row, status)
-      row._disabled = !status
-      row._expanded = status
-      let arr = []
-      this.data9.map((i) => {
+      this.data9.map((i, index) => {
         if (i.name == row.name) {
-          arr.push(row)
-        } else {
-          arr.push(i)
+          i._disabled = !status
+          i._expanded = status
         }
       })
-      this.data9 = arr
     },
     changeStatus(row, status) {
-      row._checked = status
-      let arr = []
       this.data9.map((i) => {
         if (i.name == row.name) {
-          arr.push(row)
-        } else {
-          arr.push(i)
+          i._checked = status
+          i._disableExpand = status
         }
       })
-      this.data9 = arr
+    },
+    selectSPU(selection) {
+      return
+      if (selection != []) {
+        this.selection = selection
+      }
+      console.log(this.selection)
+      this.data9.map((i) => {
+        this.selection.map((k) => {
+          debugger
+          if (i.name == k.name) {
+            i._checked = !K._checked
+            i._disableExpand = !K._disableExpand
+          }
+        })
+      })
     },
     selectData(selection, row) {
       console.log('选中数据', row)
@@ -44,6 +51,7 @@ export default {
   },
   data() {
     return {
+      selection: [],
       columns10: [
         {
           type: 'expand',
@@ -87,6 +95,7 @@ export default {
         {          _disabled: true,
           _expanded: false,
           _checked: false,
+          _disableExpand: false,
           name: 'JohnBrown',
           age: 18,
           address: 'New York No. 1 Lake Park',
@@ -100,6 +109,7 @@ export default {
         {          _disabled: true,
           _expanded: false,
           _checked: false,
+          _disableExpand: false,
           name: 'JimGreen',
           age: 25,
           address: 'London No. 1 Lake Park',
@@ -112,6 +122,7 @@ export default {
         },
         {          _disabled: true,
           _expanded: false,
+          _disableExpand: false,
           _checked: false,
           name: 'JoeBlack',
           age: 30,
@@ -125,6 +136,7 @@ export default {
         },
         {          _disabled: true,
           _expanded: false,
+          _disableExpand: false,
           _checked: false,
           name: 'JonSnow',
           age: 26,
